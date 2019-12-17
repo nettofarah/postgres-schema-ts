@@ -1,0 +1,74 @@
+{
+  "name": "postgres-schema-ts",
+  "version": "0.3.0",
+  "description": "postgres-schema-ts coverts Postgres schemas into typescript interfaces",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "author": "Netto Farah <nettofarah@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint src/**/*.ts",
+    "test": "docker-compose up -d && jest --runInBand --forceExit",
+    "pub": "tsc && np",
+    "cli": "ts-node --transpile-only ./bin/index.ts"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 120
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nettofarah/postgres-schema-ts.git"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "pg-promise": "^10.3.1",
+    "prettier": "^1.19.1",
+    "sql-template-strings": "^2.2.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "postgres-schema-ts": "./dist/bin/index.js"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{yml,md,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "keywords": [
+    "typescript",
+    "sql",
+    "schema"
+  ],
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/lodash": "^4.14.149",
+    "@types/mysql": "^2.15.8",
+    "@types/node": "^12.12.14",
+    "@types/prettier": "^1.19.0",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
+    "np": "^5.2.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.3"
+  }
+}
