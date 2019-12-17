@@ -57,7 +57,6 @@
   "devDependencies": {
     "@types/jest": "^24.0.23",
     "@types/lodash": "^4.14.149",
-    "@types/mysql": "^2.15.8",
     "@types/node": "^12.12.14",
     "@types/prettier": "^1.19.0",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
