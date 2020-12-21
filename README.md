@@ -1,6 +1,8 @@
 # postgres-schema-ts
 
-> postgres-schema-ts is a simple npm module you can use to convert a postgres schema into typescript interfaces
+> Convert Postgres schemas into TypeScript interfaces
+
+MySQL implementation: http://github.com/nettofarah/mysql-schema-ts
 
 # Usage
 
