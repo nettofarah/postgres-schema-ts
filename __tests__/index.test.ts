@@ -2,7 +2,7 @@ import { Postgres } from '../src/pg-client'
 import { inferTable, inferSchema } from '../src'
 import { SQL as sql } from 'sql-template-strings'
 
-const connectionString = 'postgresql://postgres@localhost:5433/db?currentSchema=public'
+const connectionString = 'postgresql://postgres:password@localhost:5433/db?currentSchema=public'
 const pg = new Postgres(connectionString)
 
 const account = sql`
