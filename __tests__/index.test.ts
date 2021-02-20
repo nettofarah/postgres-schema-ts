@@ -78,8 +78,13 @@ describe('inferTable', () => {
   it('works with complex types', async () => {
     const code = await inferTable(connectionString, 'complex')
     expect(code).toMatchInlineSnapshot(`
-      "export interface complex {
-        id: Object
+      "export type JSONPrimitive = string | number | boolean | null
+      export type JSONValue = JSONPrimitive | JSONObject | JSONArray
+      export type JSONObject = { [member: string]: JSONValue }
+      export type JSONArray = Array<JSONValue>
+
+      export interface complex {
+        id: JSONValue
         name: string
         nullable: string | null
         created_at: Date | null
@@ -94,7 +99,12 @@ describe('inferSchema', () => {
   it('infers all tables at once', async () => {
     const code = await inferSchema(connectionString)
     expect(code).toMatchInlineSnapshot(`
-      "export interface account {
+      "export type JSONPrimitive = string | number | boolean | null
+      export type JSONValue = JSONPrimitive | JSONObject | JSONArray
+      export type JSONObject = { [member: string]: JSONValue }
+      export type JSONArray = Array<JSONValue>
+
+      export interface account {
         username: string
         password: string
         email: string
@@ -102,7 +112,7 @@ describe('inferSchema', () => {
         last_login: Date | null
       }
       export interface complex {
-        id: Object
+        id: JSONValue
         name: string
         nullable: string | null
         created_at: Date | null
