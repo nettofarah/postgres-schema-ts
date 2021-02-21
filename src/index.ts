@@ -27,9 +27,7 @@ export async function inferTable(connectionString: string, table: string): Promi
     ${header(code.includes('JSONValue'))}
     ${code}
   `
-  const result = pretty(fullCode)
-  db.disconnect()
-  return result
+  return pretty(fullCode)
 }
 
 export async function inferSchema(connectionString: string): Promise<string> {
@@ -37,7 +35,5 @@ export async function inferSchema(connectionString: string): Promise<string> {
   const tables = await db.allTables()
   const interfaces = tables.map(table => tableToTS(table.name, table.table))
   const code = [header(interfaces.some(i => i.includes('JSONValue'))), ...interfaces].join('\n')
-  const result = pretty(code)
-  db.disconnect()
-  return result
+  return pretty(code)
 }

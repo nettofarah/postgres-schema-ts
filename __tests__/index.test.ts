@@ -3,6 +3,7 @@ import { inferTable, inferSchema } from '../src'
 import { SQL as sql } from 'sql-template-strings'
 
 const connectionString = 'postgresql://postgres:password@localhost:5433/db?currentSchema=public'
+const pg = new Postgres(connectionString)
 
 const account = sql`
   DROP TABLE IF EXISTS account;
@@ -42,11 +43,9 @@ const complex = sql`
 `
 
 beforeAll(async () => {
-  const pg = new Postgres(connectionString)
   await pg.query(account)
   await pg.query(requests)
   await pg.query(complex)
-  pg.disconnect()
 })
 
 describe('inferTable', () => {
