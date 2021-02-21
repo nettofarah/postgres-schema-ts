@@ -18,6 +18,10 @@ export class Postgres {
     this.defaultSchema = database
   }
 
+  public disconnect(): void {
+    pgp.end()
+  }
+
   public async table(tableName: string): Promise<Table> {
     const enumTypes = await this.enums(tableName)
     const table = await this.getTable(tableName, this.schema())
