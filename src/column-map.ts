@@ -34,7 +34,7 @@ export function mapColumn(table: Table, enumTypes: Enums): Table {
         return column
       case 'json':
       case 'jsonb':
-        column.tsType = 'Object'
+        column.tsType = 'JSONValue'
         return column
       case 'date':
       case 'timestamp':
@@ -62,7 +62,7 @@ export function mapColumn(table: Table, enumTypes: Enums): Table {
         return column
       case '_json':
       case '_jsonb':
-        column.tsType = 'Array<Object>'
+        column.tsType = 'JSONArray'
         return column
       case '_timestamptz':
         column.tsType = 'Array<Date>'
