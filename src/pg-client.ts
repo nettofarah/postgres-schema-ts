@@ -35,7 +35,10 @@ export class Postgres {
   }
 
   public async query<T>(query: SQLStatement): Promise<T> {
-    return this.connection.query<T>(query.text, query.values)
+    const client = await this.connection.connect()
+    const result = await client.query<T>(query.text, query.values)
+    client.done()
+    return result
   }
 
   private async tableNames(): Promise<string[]> {
