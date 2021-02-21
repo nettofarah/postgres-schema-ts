@@ -6,7 +6,7 @@ postgres:
     POSTGRES_DB: 'db'
     POSTGRES_PASSWORD: 'password'
 
-  musicbrainz:
-    image: arey/musicbrainz-database
-    ports:
-      - '5434:5432'
+musicbrainz:
+  image: arey/musicbrainz-database
+  ports:
+    - '5434:5432'
