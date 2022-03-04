@@ -1,7 +1,6 @@
 import { tableToTS } from './typescript'
 import { Postgres } from './pg-client'
-import prettier from 'prettier'
-import pkg from '../package.json'
+import { format } from 'prettier'
 
 const JSONHeader = `
 export type JSONPrimitive = string | number | boolean | null;
@@ -14,9 +13,11 @@ export type JSONArray = Array<JSONValue>;
 const header = (includesJSON: boolean): string => (includesJSON ? JSONHeader : '')
 
 function pretty(code: string): string {
-  return prettier.format(code, {
+  return format(code, {
     parser: 'typescript',
-    ...pkg.prettier
+    semi: false,
+    singleQuote: false,
+    printWidth: 120
   })
 }
 

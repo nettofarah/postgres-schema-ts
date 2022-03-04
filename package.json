@@ -1,7 +1,7 @@
 {
-  "name": "postgres-schema-ts",
-  "version": "0.4.0",
-  "description": "postgres-schema-ts coverts Postgres schemas into typescript interfaces",
+  "name": "introspect-it",
+  "version": "0.1.0",
+  "description": "introspect-it coverts Postgres schemas into typescript types",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "author": "Netto Farah <nettofarah@gmail.com>",
@@ -10,7 +10,7 @@
     "lint": "eslint src/**/*.ts",
     "test": "docker-compose up -d && jest --runInBand --forceExit",
     "pub": "tsc && np",
-    "cli": "ts-node --transpile-only ./bin/index.ts"
+    "cli": "ts-node ./bin/index.ts"
   },
   "prettier": {
     "semi": false,
@@ -19,11 +19,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nettofarah/postgres-schema-ts.git"
+    "url": "https://github.com/Dionid/introspect-it.git"
   },
   "dependencies": {
     "lodash": "^4.17.15",
-    "pg-promise": "^10.3.1",
+    "pg-promise": "^10.11.1",
     "prettier": "^1.19.1",
     "sql-template-strings": "^2.2.2"
   },
@@ -31,7 +31,7 @@
     "dist"
   ],
   "bin": {
-    "postgres-schema-ts": "./dist/bin/index.js"
+    "introspect-it": "./dist/bin/index.js"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -68,6 +68,7 @@
     "lint-staged": "^9.5.0",
     "np": "^5.2.1",
     "ts-jest": "^24.2.0",
+    "ts-node": "^10.6.0",
     "typescript": "^3.7.3"
   }
 }

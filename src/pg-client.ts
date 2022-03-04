@@ -4,8 +4,6 @@ import { Table } from './typescript'
 import { mapColumn } from './column-map'
 import { SQLStatement } from 'sql-template-strings'
 
-const pgp = pg()
-
 export type Enums = { [key: string]: string[] }
 
 export class Postgres {
@@ -13,6 +11,7 @@ export class Postgres {
   private defaultSchema: string
 
   constructor(connectionString: string) {
+    const pgp = pg()
     this.connection = pgp(connectionString)
     const database = (urlParse(connectionString, true).query['currentSchema'] as string) || 'public'
     this.defaultSchema = database
@@ -39,10 +38,12 @@ export class Postgres {
   }
 
   private async tableNames(): Promise<string[]> {
-    return await this.connection.map<string>(
+    return this.connection.map<string>(
       `SELECT table_name FROM information_schema.columns WHERE table_schema = $1 GROUP BY table_name`,
       [this.schema()],
-      (schemaItem: { table_name: string }) => schemaItem.table_name
+      (schemaItem: { table_name: string }) => {
+        return schemaItem.table_name
+      }
     )
   }
 

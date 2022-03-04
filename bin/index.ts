@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { inferSchema, inferTable } from '../src'
 
 const [...args] = process.argv

@@ -52,12 +52,28 @@ describe('inferTable', () => {
   it('infers a table', async () => {
     const code = await inferTable(connectionString, 'account')
     expect(code).toMatchInlineSnapshot(`
-      "export interface account {
-        username: string
-        password: string
-        email: string
-        created_on: Date
-        last_login: Date | null
+      "export type AccountTableUsername = string
+      export type AccountTablePassword = string
+      export type AccountTableEmail = string
+      export type AccountTableCreatedOn = Date
+      export type AccountTableLastLogin = Date | null
+
+      export type AccountTable = {
+        username: AccountTableUsername
+        password: AccountTablePassword
+        email: AccountTableEmail
+        created_on: AccountTableCreatedOn
+        last_login: AccountTableLastLogin
+      }
+
+      export const AccountTableName = \\"account\\"
+
+      export const AccountTableColumnNames = {
+        username: \\"username\\",
+        password: \\"password\\",
+        email: \\"email\\",
+        created_on: \\"created_on\\",
+        last_login: \\"last_login\\"
       }
       "
     `)
@@ -66,10 +82,22 @@ describe('inferTable', () => {
   it('works with enums', async () => {
     const code = await inferTable(connectionString, 'requests')
     expect(code).toMatchInlineSnapshot(`
-      "export interface requests {
-        name: string
-        url: string
-        integration_type: 'destination' | 'source'
+      "export type RequestsTableName = string
+      export type RequestsTableUrl = string
+      export type RequestsTableIntegrationType = \\"destination\\" | \\"source\\"
+
+      export type RequestsTable = {
+        name: RequestsTableName
+        url: RequestsTableUrl
+        integration_type: RequestsTableIntegrationType
+      }
+
+      export const RequestsTableName = \\"requests\\"
+
+      export const RequestsTableColumnNames = {
+        name: \\"name\\",
+        url: \\"url\\",
+        integration_type: \\"integration_type\\"
       }
       "
     `)
@@ -83,12 +111,28 @@ describe('inferTable', () => {
       export type JSONObject = { [member: string]: JSONValue }
       export type JSONArray = Array<JSONValue>
 
-      export interface complex {
-        id: JSONValue
-        name: string
-        nullable: string | null
-        created_at: Date | null
-        created_on: Date
+      export type ComplexTableId = JSONValue
+      export type ComplexTableName = string
+      export type ComplexTableNullable = string | null
+      export type ComplexTableCreatedAt = Date | null
+      export type ComplexTableCreatedOn = Date
+
+      export type ComplexTable = {
+        id: ComplexTableId
+        name: ComplexTableName
+        nullable: ComplexTableNullable
+        created_at: ComplexTableCreatedAt
+        created_on: ComplexTableCreatedOn
+      }
+
+      export const ComplexTableName = \\"complex\\"
+
+      export const ComplexTableColumnNames = {
+        id: \\"id\\",
+        name: \\"name\\",
+        nullable: \\"nullable\\",
+        created_at: \\"created_at\\",
+        created_on: \\"created_on\\"
       }
       "
     `)
@@ -104,24 +148,70 @@ describe('inferSchema', () => {
       export type JSONObject = { [member: string]: JSONValue }
       export type JSONArray = Array<JSONValue>
 
-      export interface account {
-        username: string
-        password: string
-        email: string
-        created_on: Date
-        last_login: Date | null
+      export type AccountTableUsername = string
+      export type AccountTablePassword = string
+      export type AccountTableEmail = string
+      export type AccountTableCreatedOn = Date
+      export type AccountTableLastLogin = Date | null
+
+      export type AccountTable = {
+        username: AccountTableUsername
+        password: AccountTablePassword
+        email: AccountTableEmail
+        created_on: AccountTableCreatedOn
+        last_login: AccountTableLastLogin
       }
-      export interface complex {
-        id: JSONValue
-        name: string
-        nullable: string | null
-        created_at: Date | null
-        created_on: Date
+
+      export const AccountTableName = \\"account\\"
+
+      export const AccountTableColumnNames = {
+        username: \\"username\\",
+        password: \\"password\\",
+        email: \\"email\\",
+        created_on: \\"created_on\\",
+        last_login: \\"last_login\\"
       }
-      export interface requests {
-        name: string
-        url: string
-        integration_type: 'destination' | 'source'
+
+      export type ComplexTableId = JSONValue
+      export type ComplexTableName = string
+      export type ComplexTableNullable = string | null
+      export type ComplexTableCreatedAt = Date | null
+      export type ComplexTableCreatedOn = Date
+
+      export type ComplexTable = {
+        id: ComplexTableId
+        name: ComplexTableName
+        nullable: ComplexTableNullable
+        created_at: ComplexTableCreatedAt
+        created_on: ComplexTableCreatedOn
+      }
+
+      export const ComplexTableName = \\"complex\\"
+
+      export const ComplexTableColumnNames = {
+        id: \\"id\\",
+        name: \\"name\\",
+        nullable: \\"nullable\\",
+        created_at: \\"created_at\\",
+        created_on: \\"created_on\\"
+      }
+
+      export type RequestsTableName = string
+      export type RequestsTableUrl = string
+      export type RequestsTableIntegrationType = \\"destination\\" | \\"source\\"
+
+      export type RequestsTable = {
+        name: RequestsTableName
+        url: RequestsTableUrl
+        integration_type: RequestsTableIntegrationType
+      }
+
+      export const RequestsTableName = \\"requests\\"
+
+      export const RequestsTableColumnNames = {
+        name: \\"name\\",
+        url: \\"url\\",
+        integration_type: \\"integration_type\\"
       }
       "
     `)
