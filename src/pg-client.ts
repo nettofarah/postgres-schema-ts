@@ -40,7 +40,11 @@ export class Postgres {
 
   private async tableNames(): Promise<string[]> {
     return await this.connection.map<string>(
-      `SELECT table_name FROM information_schema.columns WHERE table_schema = $1 GROUP BY table_name`,
+      `SELECT table_name 
+      FROM information_schema.columns 
+      WHERE table_schema = $1 
+      GROUP BY table_name 
+      ORDER BY table_name`,
       [this.schema()],
       (schemaItem: { table_name: string }) => schemaItem.table_name
     )
@@ -79,7 +83,9 @@ export class Postgres {
     await this.connection.each<T>(
       `SELECT column_name, udt_name, is_nullable
         FROM information_schema.columns
-        WHERE table_name = $1 and table_schema = $2`,
+        WHERE table_name = $1 and table_schema = $2
+        ORDER BY ordinal_position
+      `,
       [tableName, tableSchema],
       (schemaItem: T) => {
         tableDefinition[schemaItem.column_name] = {
