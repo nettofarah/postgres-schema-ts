@@ -1,12 +1,15 @@
-postgres:
-  image: postgres:9.6
-  ports:
-    - '5433:5432'
-  environment:
-    POSTGRES_DB: 'db'
-    POSTGRES_PASSWORD: 'password'
+version: '3'
 
-musicbrainz:
-  image: arey/musicbrainz-database
-  ports:
-    - '5434:5432'
+services:
+  postgres:
+    image: postgres:9.6
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_DB: 'db'
+      POSTGRES_PASSWORD: 'password'
+
+  musicbrainz:
+    image: arey/musicbrainz-database
+    ports:
+      - '5434:5432'
