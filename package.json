@@ -8,7 +8,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint src/**/*.ts",
-    "test": "docker-compose up -d && jest --runInBand --forceExit",
+    "pretest": "docker-compose up -d && wait-port 5433",
+    "test": "jest --runInBand --forceExit",
     "pub": "tsc && np",
     "cli": "ts-node --transpile-only ./bin/index.ts"
   },
@@ -68,6 +69,7 @@
     "lint-staged": "^9.5.0",
     "np": "^5.2.1",
     "ts-jest": "^24.2.0",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.3",
+    "wait-port": "^0.2.9"
   }
 }
